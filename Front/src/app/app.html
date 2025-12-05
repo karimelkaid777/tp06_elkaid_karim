@@ -3,8 +3,21 @@
     <h1>{{ title }}</h1>
     <nav class="nav">
       <a routerLink="/pollutions" routerLinkActive="active">Pollutions</a>
-      <a routerLink="/users/list" routerLinkActive="active">Utilisateurs</a>
-      <a routerLink="/users/login" routerLinkActive="active">Connexion</a>
+      <a routerLink="/pollutions/favorites" routerLinkActive="active" class="favorites-link">
+        ⭐ Favoris
+        @if (isAuthenticated() && favoritesCount() > 0) {
+          <span class="badge">{{ favoritesCount() }}</span>
+        }
+      </a>
+
+      @if (!isAuthenticated()) {
+        <a routerLink="/users/login" routerLinkActive="active">Connexion</a>
+      } @else {
+        <div class="user-menu">
+          <span class="user-name">{{ currentUser()?.prenom }} {{ currentUser()?.nom }}</span>
+          <button (click)="logout()" class="logout-btn">Déconnexion</button>
+        </div>
+      }
     </nav>
   </div>
 </header>

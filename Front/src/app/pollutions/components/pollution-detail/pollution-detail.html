@@ -12,6 +12,14 @@
     <div class="header-actions">
       <a routerLink="/pollutions/list" class="btn-back">← Retour</a>
       <div class="actions">
+        <button
+          (click)="toggleFavorite()"
+          class="btn btn-favorite"
+          [class.is-favorite]="isFavorite()(pollution()!.id)"
+          [class.requires-login]="!isAuthenticated()"
+          [title]="!isAuthenticated() ? 'Connectez-vous pour ajouter aux favoris' : (isFavorite()(pollution()!.id) ? 'Retirer des favoris' : 'Ajouter aux favoris')">
+          {{ isFavorite()(pollution()!.id) ? '⭐ En favoris' : '☆ Ajouter aux favoris' }}
+        </button>
         <button (click)="onEdit()" class="btn btn-edit">
           ✏️ Modifier
         </button>

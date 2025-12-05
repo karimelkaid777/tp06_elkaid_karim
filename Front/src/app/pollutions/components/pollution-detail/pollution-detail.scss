@@ -28,10 +28,36 @@
         border-radius: 4px;
         cursor: pointer;
         font-weight: 600;
-        transition: opacity 0.3s;
+        transition: all 0.3s;
 
         &:hover {
           opacity: 0.8;
+          transform: translateY(-2px);
+        }
+
+        &.btn-favorite {
+          background-color: #95a5a6;
+          color: white;
+          border: 2px solid transparent;
+
+          &:hover {
+            background-color: #7f8c8d;
+          }
+
+          &.is-favorite {
+            background-color: #f39c12;
+            border-color: #f39c12;
+            animation: pulse 2s infinite;
+          }
+
+          &.requires-login {
+            opacity: 0.7;
+
+            &:hover {
+              background-color: #3498db;
+              border-color: #3498db;
+            }
+          }
         }
 
         &.btn-edit {
@@ -42,6 +68,15 @@
         &.btn-delete {
           background-color: #e74c3c;
           color: white;
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
         }
       }
     }

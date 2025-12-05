@@ -6,17 +6,17 @@ import { environment } from '../../../environments/environment';
 import {Pollution} from '../models/pollution.model';
 import {CreatePollutionDto, UpdatePollutionDto, PollutionFilterDto} from '../models/pollution.dto';
 
-// Interface pour les données du backend (snake_case)
+// Interface pour les données du backend (camelCase)
 interface PollutionBackend {
   id: number;
-  titre: string;
-  type_pollution: string;
+  title: string;
+  type: string;
   description: string;
-  date_observation: string;
-  lieu: string;
+  dateObservation: string;
+  location: string;
   latitude: number;
   longitude: number;
-  photo_url?: string;
+  photoUrl?: string;
 }
 
 @Injectable({
@@ -30,42 +30,42 @@ export class PollutionService {
   private mapFromBackend(data: PollutionBackend): Pollution {
     return {
       id: data.id,
-      title: data.titre,
-      type: data.type_pollution as any,
+      title: data.title,
+      type: data.type as any,
       description: data.description,
-      dateObservation: new Date(data.date_observation),
-      location: data.lieu,
+      dateObservation: new Date(data.dateObservation),
+      location: data.location,
       latitude: data.latitude,
       longitude: data.longitude,
-      photoUrl: data.photo_url
+      photoUrl: data.photoUrl
     };
   }
 
   // Convertir du format frontend vers backend pour CREATE
   private mapToBackendCreate(dto: CreatePollutionDto): any {
     return {
-      titre: dto.title,
-      type_pollution: dto.type,
+      title: dto.title,
+      type: dto.type,
       description: dto.description,
-      date_observation: dto.dateObservation,
-      lieu: dto.location,
+      dateObservation: dto.dateObservation,
+      location: dto.location,
       latitude: dto.latitude,
       longitude: dto.longitude,
-      photo_url: dto.photoUrl
+      photoUrl: dto.photoUrl
     };
   }
 
   // Convertir du format frontend vers backend pour UPDATE
   private mapToBackendUpdate(dto: UpdatePollutionDto): any {
     const mapped: any = {};
-    if (dto.title !== undefined) mapped.titre = dto.title;
-    if (dto.type !== undefined) mapped.type_pollution = dto.type;
+    if (dto.title !== undefined) mapped.title = dto.title;
+    if (dto.type !== undefined) mapped.type = dto.type;
     if (dto.description !== undefined) mapped.description = dto.description;
-    if (dto.dateObservation !== undefined) mapped.date_observation = dto.dateObservation;
-    if (dto.location !== undefined) mapped.lieu = dto.location;
+    if (dto.dateObservation !== undefined) mapped.dateObservation = dto.dateObservation;
+    if (dto.location !== undefined) mapped.location = dto.location;
     if (dto.latitude !== undefined) mapped.latitude = dto.latitude;
     if (dto.longitude !== undefined) mapped.longitude = dto.longitude;
-    if (dto.photoUrl !== undefined) mapped.photo_url = dto.photoUrl;
+    if (dto.photoUrl !== undefined) mapped.photoUrl = dto.photoUrl;
     return mapped;
   }
 
@@ -103,8 +103,8 @@ export class PollutionService {
     let url = this.apiUrl;
     const params = new URLSearchParams();
 
-    if (filters.type) params.append('type_pollution', filters.type);
-    if (filters.title) params.append('titre', filters.title);
+    if (filters.type) params.append('type', filters.type);
+    if (filters.title) params.append('title', filters.title);
 
     const queryString = params.toString();
     if (queryString) {

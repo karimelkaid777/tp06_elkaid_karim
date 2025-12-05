@@ -44,6 +44,51 @@
         outline: none;
         border-color: #2196F3;
       }
+
+      &.error {
+        border-color: #e74c3c;
+        background-color: #ffebee;
+
+        &:focus {
+          border-color: #c62828;
+        }
+      }
+
+      &.valid {
+        border-color: #27ae60;
+        background-color: #e8f5e9;
+
+        &:focus {
+          border-color: #229954;
+        }
+      }
+    }
+
+    .field-error {
+      color: #c62828;
+      font-size: 13px;
+      margin-top: 5px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .field-success {
+      color: #27ae60;
+      font-size: 13px;
+      margin-top: 5px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .field-hint {
+      color: #7f8c8d;
+      font-size: 12px;
+      margin-top: 5px;
+      line-height: 1.4;
+
+      strong {
+        color: #555;
+      }
     }
   }
 

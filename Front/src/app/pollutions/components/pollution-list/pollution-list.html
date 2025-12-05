@@ -49,6 +49,14 @@
           <p class="description">{{ pollution.description }}</p>
 
           <div class="card-actions">
+            <button
+              class="btn-favorite"
+              [class.is-favorite]="isFavorite()(pollution.id)"
+              [class.requires-login]="!isAuthenticated()"
+              (click)="toggleFavorite(pollution, $event)"
+              [title]="!isAuthenticated() ? 'Connectez-vous pour ajouter aux favoris' : (isFavorite()(pollution.id) ? 'Retirer des favoris' : 'Ajouter aux favoris')">
+              {{ isFavorite()(pollution.id) ? '⭐' : '☆' }}
+            </button>
             <a
               [routerLink]="['/pollutions/edit', pollution.id]"
               class="btn-edit"

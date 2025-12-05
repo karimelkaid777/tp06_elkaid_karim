@@ -5,6 +5,7 @@ export interface User {
   login: string;
   email: string;
   pass?: string;
+  token?: string;
 }
 
 export interface CreateUserDto {

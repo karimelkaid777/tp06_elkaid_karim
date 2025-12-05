@@ -1,5 +1,10 @@
 module.exports = app => {
     const utilisateur = require("../controllers/utilisateur.controllers.js");
+    const { validateRequest } = require("zod-express-middleware");
+    const {
+        createUtilisateurSchema,
+        loginSchema
+    } = require("../validators/utilisateur.validator.js");
 
     var router = require("express").Router();
 
@@ -7,10 +12,16 @@ module.exports = app => {
     router.get("/", utilisateur.getAll);
 
     // CREATE new utilisateur
-    router.post("/", utilisateur.create);
+    router.post("/",
+        validateRequest({ body: createUtilisateurSchema }),
+        utilisateur.create
+    );
 
     // LOGIN utilisateur
-    router.post("/login", utilisateur.login);
+    router.post("/login",
+        validateRequest({ body: loginSchema }),
+        utilisateur.login
+    );
 
     app.use('/api/utilisateur', router);
 };

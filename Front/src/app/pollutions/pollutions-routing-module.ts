@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { PollutionList } from './components/pollution-list/pollution-list';
 import { PollutionForm } from './components/pollution-form/pollution-form';
 import { PollutionDetail } from './components/pollution-detail/pollution-detail';
+import { FavoritesComponent } from './components/favorites/favorites';
+import { authGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: PollutionList },
-  { path: 'new', component: PollutionForm },
-  { path: 'edit/:id', component: PollutionForm },
+  { path: 'favorites', component: FavoritesComponent },
+  { path: 'new', component: PollutionForm, canActivate: [authGuard] },
+  { path: 'edit/:id', component: PollutionForm, canActivate: [authGuard] },
   { path: 'detail/:id', component: PollutionDetail }
 ];
 
